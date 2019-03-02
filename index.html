@@ -6,10 +6,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mainbit BOT Cambios</title>
+
+    <script src="azure_storage.js"></script>
 </head>
 
 <body>
-    <h1>Hola Mundo</h1>
+    <div>
+        <h1>Bienvenido</h1>
+        <p>Te ayudare a burcar información en Azure Storage Table:</p>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <p>Ingresa tu PartitionKey y RowKey para encontrar la información deseada:</p>
+                <table>
+                    <tr>
+                        <td>PartitionKey:</td>
+                        <td><input type="text" id="partitionKeyBusqueda"></td>
+                    </tr>
+                    <tr>
+                        <td>RowKey:</td>
+                        <td><input type="text" id="rowKeyBusqueda"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="Buscar" onclick="consultarEntidad()"></td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                <p>Se encontro:</p>
+            </li>
+            <table>
+                <tr>
+                    <td>PartitionKey:</td>
+                    <td><input type="text" readonly="readonly" id="partitionKeyEn"></td>
+                </tr>
+                <tr>
+                    <td>RowKey:</td>
+                    <td><input type="text" readonly="readonly" id="rowKeyEn"></td>
+                </tr>
+                <tr>
+                    <td>Timestamp:</td>
+                    <td><input type="text" readonly="readonly" id="timestampEn"></td>
+                </tr>
+                <tr>
+                    <td>Area:</td>
+                    <td><input type="text" readonly="readonly" id="areaEn"></td>
+                </tr>
+                <tr>
+                    <td>Baja:</td>
+                    <td><input type="text" readonly="readonly" id="bajaEn"></td>
+                </tr>
+                <tr>
+                    <td>Borrado:</td>
+                    <td><input type="text" readonly="readonly" id="borradoEn"></td>
+                </tr>
+                <tr>
+                    <td>Check:</td>
+                    <td><input type="text" readonly="readonly" id="checkEn"></td>
+                </tr>
+                <tr>
+                    <td>Descripcion:</td>
+                    <td><input type="text" readonly="readonly" id="descripcionEn"></td>
+                </tr>
+                <tr>
+                    <td>Fecha Fin::</td>
+                    <td><input type="text" readonly="readonly" id="fechafinEn"></td>
+                </tr>
+                <tr>
+                    <td>Fecha ini:</td>
+                    <td><input type="text" readonly="readonly" id="fechainiEn"></td>
+                </tr>
+                <tr>
+                    <td>Hoja de servicio:</td>
+                    <td><input type="text" readonly="readonly" id="hojadeservicioEn"></td>
+                </tr>
+                <tr>
+                    <td>Inmueble:</td>
+                    <td><input type="text" readonly="readonly" id="inmuebleEn"></td>
+                </tr>
+                <tr>
+                    <td>Localidad:</td>
+                    <td><input type="text" readonly="readonly" id="localidadEn"></td>
+                </tr>
+                <tr>
+                    <td>Nombre Enlace:</td>
+                    <td><input type="text" readonly="readonly" id="nombreenlaceEn"></td>
+                </tr>
+                <tr>
+                    <td>Nombre Usuario:</td>
+                    <td><input type="text" readonly="readonly" id="nombreusuarioEn"></td>
+                </tr>
+                <tr>
+                    <td>Pospuesto:</td>
+                    <td><input type="text" readonly="readonly" id="pospuestoEn"></td>
+                </tr>
+                <tr>
+                    <td>Proyecto:</td>
+                    <td><input type="text" readonly="readonly" id="proyectoEn"></td>
+                </tr>
+                <tr>
+                    <td>Resguardo:</td>
+                    <td><input type="text" readonly="readonly" id="resguardoEn"></td>
+                </tr>
+                <tr>
+                    <td>Serie Borrada:</td>
+                    <td><input type="text" readonly="readonly" id="serieborradaEn"></td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td><input type="text" readonly="readonly" id="statusEn"></td>
+                </tr>
+                <tr>
+                    <td>Servicio:</td>
+                    <td><input type="text" readonly="readonly" id="servicioEn"></td>
+                </tr>
+            </table>
+            <li>
+                <p>Estado de la tarea: <input type="text" id="estadoTarea" readonly="readonly" size="70"></p>
+            </li>
+        </ul>
+    </div>
+</body>
 </body>
 
 </html>
