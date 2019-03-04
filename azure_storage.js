@@ -214,9 +214,12 @@ function remplazarPartKey() {
                         document.getElementById("statusCam").value = statusEn;
                         document.getElementById("servicioCam").value = servicioEn;
 
+                        //Se notifica al usuario el estado de la tarea:
                         document.getElementById("estadoTarea").value = "¡Cambio realizado!";
                         console.log('La entidad se ha eliminado.');
                     } else {
+                        //Se notifica al usuario si hay un error:
+                        document.getElementById("estadoTarea").value = "Ocurrio un error durante el cambio.";
                         console.log("Ocurrio un error...");
                         return;
                     }
@@ -231,4 +234,71 @@ function remplazarPartKey() {
         //En caso que no haya un busqueda anteriormente:
         document.getElementById("estadoTarea").value = "Debes realizar una busqueda primero...";
     }
+}
+
+//Actualizar entidad:
+function actualizarEntidad() {
+    //Se obtiene el estado actual de trabajo para poder verificar si se puede o no continuar con el:
+    stringIF = document.getElementById("estadoTarea").value;
+
+    //Verifica en que estado se encuentra la tarea actual y toma una decisión de que hacer:
+    if (stringIF == "¡Busqueda exitosa!") {
+        //Cambiar las variables por los campos modificados por el usuario:
+        areaEn = document.getElementById("areaEn").value;
+        bajaEn = document.getElementById("bajaEn").value;
+        borradoEn = document.getElementById("borradoEn").value;
+        checkEn = document.getElementById("checkEn").value;
+        descripcionEn = document.getElementById("descripcionEn").value;
+        fecha_FinEn = document.getElementById("fechafinEn").value;
+        fecha_iniEn = document.getElementById("fechainiEn").value;
+        hojaDeServicioEn = document.getElementById("hojadeservicioEn").value;
+        inmuebleEn = document.getElementById("inmuebleEn").value;
+        localidadEn = document.getElementById("localidadEn").value;
+        nombreEnlaceEn = document.getElementById("nombreenlaceEn").value;
+        nombreUsuarioEn = document.getElementById("nombreusuarioEn").value;
+        pospuestoEn = document.getElementById("pospuestoEn").value;
+        proyectoEn = document.getElementById("proyectoEn").value;
+        resguardoEn = document.getElementById("resguardoEn").value;
+        serieBorradaEn = document.getElementById("serieborradaEn").value;
+        statusEn = document.getElementById("statusEn").value;
+        servicioEn = document.getElementById("servicioEn").value;
+
+        //Se le da la información de las variables anteriores al JSON base:
+        task['Area']['_'] = areaEn.toString();
+        task['Baja']['_'] = bajaEn.toString();
+        task['Borrado']['_'] = borradoEn.toString();
+        task['Check']['_'] = checkEn.toString();
+        task['Descripcion']['_'] = descripcionEn.toString();
+        task['Fecha_Fin']['_'] = fecha_FinEn.toString();
+        task['Fecha_ini']['_'] = fecha_iniEn.toString();
+        task['HojaDeServicio']['_'] = hojaDeServicioEn.toString();
+        task['Inmueble']['_'] = inmuebleEn.toString();
+        task['Localidad']['_'] = localidadEn.toString();
+        task['NombreEnlace']['_'] = nombreEnlaceEn.toString();
+        task['NombreUsuario']['_'] = nombreUsuarioEn.toString();
+        task['Pospuesto']['_'] = pospuestoEn.toString();
+        task['Proyecto']['_'] = proyectoEn.toString();
+        task['Resguardo']['_'] = resguardoEn.toString();
+        task['SerieBorrada']['_'] = serieBorradaEn.toString();
+        task['Servicio']['_'] = servicioEn.toString();
+        task['Status']['_'] = statusEn.toString();
+
+        //Realiza la actualización del row:
+        tableSvc.replaceEntity(`${tablaUsar}`, task, function(error, result, response) {
+            if (!error) {
+                console.log("Entidad actualizada");
+                //Se informa que la actualización a tenido exito:
+                document.getElementById("estadoTarea").value = "¡Actualización exitosa!"
+            } else {
+                console.log("¡Ocurrio un error en la actualización...!");
+                //Se informa que la actualización no a tenido exito:
+                console.log(error);
+                document.getElementById("estadoTarea").value = "¡Ocurrio un error en la actualización...!"
+            }
+        });
+    } else {
+        //En caso que no haya un busqueda anteriormente:
+        document.getElementById("estadoTarea").value = "Debes realizar una busqueda primero...";
+    }
+
 }

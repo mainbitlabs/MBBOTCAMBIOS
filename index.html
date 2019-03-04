@@ -13,7 +13,7 @@
 <body>
     <div>
         <h1>Bienvenido</h1>
-        <p>Te ayudare a burcar información en Azure Storage Table:</p>
+        <p>Te ayudaré a buscar y modificar información en Azure Storage Table:</p>
     </div>
     <div>
         <ul>
@@ -34,7 +34,9 @@
                 </table>
             </li>
             <li>
-                <p>Se encontro:</p>
+                <p>Se encontro la siguente información:</p>
+                <p>Puedes modificar los campos permitidos escribiendo sobre ellos
+                    <br>despues de una busqueda y dando click en el boton "Actualizar".</p>
             </li>
             <table>
                 <tr>
@@ -55,7 +57,8 @@
                 </tr>
                 <tr>
                     <td>Baja:</td>
-                    <td><input type="text" readonly="readonly" id="bajaEn"></td>
+                    <td><input type="text" id="bajaEn"></td>
+                    <td>[Permite modificación]</td>
                 </tr>
                 <tr>
                     <td>Borrado:</td>
@@ -70,7 +73,7 @@
                     <td><input type="text" readonly="readonly" id="descripcionEn"></td>
                 </tr>
                 <tr>
-                    <td>Fecha Fin::</td>
+                    <td>Fecha Fin:</td>
                     <td><input type="text" readonly="readonly" id="fechafinEn"></td>
                 </tr>
                 <tr>
@@ -91,11 +94,13 @@
                 </tr>
                 <tr>
                     <td>Nombre Enlace:</td>
-                    <td><input type="text" readonly="readonly" id="nombreenlaceEn"></td>
+                    <td><input type="text" id="nombreenlaceEn"></td>
+                    <td>[Permite modificación]</td>
                 </tr>
                 <tr>
                     <td>Nombre Usuario:</td>
-                    <td><input type="text" readonly="readonly" id="nombreusuarioEn"></td>
+                    <td><input type="text" id="nombreusuarioEn"></td>
+                    <td>[Permite modificación]</td>
                 </tr>
                 <tr>
                     <td>Pospuesto:</td>
@@ -103,7 +108,8 @@
                 </tr>
                 <tr>
                     <td>Proyecto:</td>
-                    <td><input type="text" readonly="readonly" id="proyectoEn"></td>
+                    <td><input type="text" id="proyectoEn"></td>
+                    <td>[Permite modificación]</td>
                 </tr>
                 <tr>
                     <td>Resguardo:</td>
@@ -120,6 +126,9 @@
                 <tr>
                     <td>Servicio:</td>
                     <td><input type="text" readonly="readonly" id="servicioEn"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Actualizar" onclick="actualizarEntidad()"></td>
                 </tr>
             </table>
             <li>
