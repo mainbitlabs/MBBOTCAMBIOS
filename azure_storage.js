@@ -141,7 +141,32 @@ function consultarEntidad() {
             document.getElementById("statusEn").value = statusEn;
             document.getElementById("servicioEn").value = servicioEn;
 
+            //Se manda la información vieja al HTML:
+            document.getElementById("partitionKeyCam").value = "";
+            document.getElementById("rowKeyCam").value = "";
+            document.getElementById("timestampCam").value = "";
+            document.getElementById("areaCam").value = "";
+            document.getElementById("bajaCam").value = "";
+            document.getElementById("borradoCam").value = "";
+            document.getElementById("checkCam").value = "";
+            document.getElementById("descripcionCam").value = "";
+            document.getElementById("fechafinCam").value = "";
+            document.getElementById("fechainiCam").value = "";
+            document.getElementById("hojadeservicioCam").value = "";
+            document.getElementById("inmuebleCam").value = "";
+            document.getElementById("localidadCam").value = "";
+            document.getElementById("nombreenlaceCam").value = "";
+            document.getElementById("nombreusuarioCam").value = "";
+            document.getElementById("pospuestoCam").value = "";
+            document.getElementById("proyectoCam").value = "";
+            document.getElementById("resguardoCam").value = "";
+            document.getElementById("serieborradaCam").value = "";
+            document.getElementById("statusCam").value = "";
+            document.getElementById("servicioCam").value = "";
+
             //Se informa del estado de la busqueda:
+            document.getElementById("infoTabla").value = "Resultado busqueda:"
+            document.getElementById("informaUsuario").value = "Se encontro la siguente información:"
             document.getElementById("estadoTarea").value = "¡Busqueda exitosa!"
             console.log("Busqueda correcta");
         } else {
@@ -164,10 +189,35 @@ function remplazarPartKey() {
 
         tableSvc.insertEntity(`${tablaUsar}`, task, function(error, result, response) {
             if (!error) {
+
                 document.getElementById("estadoTarea").value = "Se agrego la entidad correctamente.";
                 //Se elimina la entidad que fue remplazada con la insertada anteriormente:
                 tableSvc.deleteEntity(`${tablaUsar}`, taskDelete, function(error, response) {
                     if (!error) {
+                        //Se manda la información vieja al HTML:
+                        document.getElementById("partitionKeyCam").value = partitionKeyEn;
+                        document.getElementById("rowKeyCam").value = rowKeyEn;
+                        document.getElementById("timestampCam").value = timestampEn;
+                        document.getElementById("areaCam").value = areaEn;
+                        document.getElementById("bajaCam").value = bajaEn;
+                        document.getElementById("borradoCam").value = borradoEn;
+                        document.getElementById("checkCam").value = checkEn;
+                        document.getElementById("descripcionCam").value = descripcionEn;
+                        document.getElementById("fechafinCam").value = fecha_FinEn;
+                        document.getElementById("fechainiCam").value = fecha_iniEn;
+                        document.getElementById("hojadeservicioCam").value = hojaDeServicioEn;
+                        document.getElementById("inmuebleCam").value = inmuebleEn;
+                        document.getElementById("localidadCam").value = localidadEn;
+                        document.getElementById("nombreenlaceCam").value = nombreEnlaceEn;
+                        document.getElementById("nombreusuarioCam").value = nombreUsuarioEn;
+                        document.getElementById("pospuestoCam").value = pospuestoEn;
+                        document.getElementById("proyectoCam").value = proyectoEn;
+                        document.getElementById("resguardoCam").value = resguardoEn;
+                        document.getElementById("serieborradaCam").value = serieBorradaEn;
+                        document.getElementById("statusCam").value = statusEn;
+                        document.getElementById("servicioCam").value = servicioEn;
+
+
                         //Se extrae la informacion del json en variables:
                         partitionKeyEn = task['PartitionKey']['_'];
                         rowKeyEn = task['RowKey']['_'];
@@ -191,30 +241,33 @@ function remplazarPartKey() {
                         servicioEn = task['Servicio']['_'];
                         statusEn = task['Status']['_'];
 
-                        //Se manda la información obtenida a la ventana HTML:
-                        document.getElementById("partitionKeyCam").value = partitionKeyEn;
-                        document.getElementById("rowKeyCam").value = rowKeyEn;
-                        document.getElementById("timestampCam").value = timestampEn;
-                        document.getElementById("areaCam").value = areaEn;
-                        document.getElementById("bajaCam").value = bajaEn;
-                        document.getElementById("borradoCam").value = borradoEn;
-                        document.getElementById("checkCam").value = checkEn;
-                        document.getElementById("descripcionCam").value = descripcionEn;
-                        document.getElementById("fechafinCam").value = fecha_FinEn;
-                        document.getElementById("fechainiCam").value = fecha_iniEn;
-                        document.getElementById("hojadeservicioCam").value = hojaDeServicioEn;
-                        document.getElementById("inmuebleCam").value = inmuebleEn;
-                        document.getElementById("localidadCam").value = localidadEn;
-                        document.getElementById("nombreenlaceCam").value = nombreEnlaceEn;
-                        document.getElementById("nombreusuarioCam").value = nombreUsuarioEn;
-                        document.getElementById("pospuestoCam").value = pospuestoEn;
-                        document.getElementById("proyectoCam").value = proyectoEn;
-                        document.getElementById("resguardoCam").value = resguardoEn;
-                        document.getElementById("serieborradaCam").value = serieBorradaEn;
-                        document.getElementById("statusCam").value = statusEn;
-                        document.getElementById("servicioCam").value = servicioEn;
+                        //Se manda la información nueva al HTML:
+                        document.getElementById("partitionKeyEn").value = partitionKeyEn;
+                        document.getElementById("rowKeyEn").value = rowKeyEn;
+                        document.getElementById("timestampEn").value = timestampEn;
+                        document.getElementById("areaEn").value = areaEn;
+                        document.getElementById("bajaEn").value = bajaEn;
+                        document.getElementById("borradoEn").value = borradoEn;
+                        document.getElementById("checkEn").value = checkEn;
+                        document.getElementById("descripcionEn").value = descripcionEn;
+                        document.getElementById("fechafinEn").value = fecha_FinEn;
+                        document.getElementById("fechainiEn").value = fecha_iniEn;
+                        document.getElementById("hojadeservicioEn").value = hojaDeServicioEn;
+                        document.getElementById("inmuebleEn").value = inmuebleEn;
+                        document.getElementById("localidadEn").value = localidadEn;
+                        document.getElementById("nombreenlaceEn").value = nombreEnlaceEn;
+                        document.getElementById("nombreusuarioEn").value = nombreUsuarioEn;
+                        document.getElementById("pospuestoEn").value = pospuestoEn;
+                        document.getElementById("proyectoEn").value = proyectoEn;
+                        document.getElementById("resguardoEn").value = resguardoEn;
+                        document.getElementById("serieborradaEn").value = serieBorradaEn;
+                        document.getElementById("statusEn").value = statusEn;
+                        document.getElementById("servicioEn").value = servicioEn;
+
 
                         //Se notifica al usuario el estado de la tarea:
+                        document.getElementById("infoTabla").value = "Nuevo:"
+                        document.getElementById("informaUsuario").value = "Se modifico el PartitionKey:"
                         document.getElementById("estadoTarea").value = "¡Cambio realizado!";
                         console.log('La entidad se ha eliminado.');
                     } else {
@@ -232,6 +285,7 @@ function remplazarPartKey() {
         });
     } else {
         //En caso que no haya un busqueda anteriormente:
+        document.getElementById("informaUsuario").value = "¡No hay información para trabajar!"
         document.getElementById("estadoTarea").value = "Debes realizar una busqueda primero...";
     }
 }
@@ -243,6 +297,29 @@ function actualizarEntidad() {
 
     //Verifica en que estado se encuentra la tarea actual y toma una decisión de que hacer:
     if (stringIF == "¡Busqueda exitosa!") {
+        //Se manda la información la ventana HTML:
+        document.getElementById("partitionKeyCam").value = partitionKeyEn;
+        document.getElementById("rowKeyCam").value = rowKeyEn;
+        document.getElementById("timestampCam").value = timestampEn;
+        document.getElementById("areaCam").value = areaEn;
+        document.getElementById("bajaCam").value = bajaEn;
+        document.getElementById("borradoCam").value = borradoEn;
+        document.getElementById("checkCam").value = checkEn;
+        document.getElementById("descripcionCam").value = descripcionEn;
+        document.getElementById("fechafinCam").value = fecha_FinEn;
+        document.getElementById("fechainiCam").value = fecha_iniEn;
+        document.getElementById("hojadeservicioCam").value = hojaDeServicioEn;
+        document.getElementById("inmuebleCam").value = inmuebleEn;
+        document.getElementById("localidadCam").value = localidadEn;
+        document.getElementById("nombreenlaceCam").value = nombreEnlaceEn;
+        document.getElementById("nombreusuarioCam").value = nombreUsuarioEn;
+        document.getElementById("pospuestoCam").value = pospuestoEn;
+        document.getElementById("proyectoCam").value = proyectoEn;
+        document.getElementById("resguardoCam").value = resguardoEn;
+        document.getElementById("serieborradaCam").value = serieBorradaEn;
+        document.getElementById("statusCam").value = statusEn;
+        document.getElementById("servicioCam").value = servicioEn;
+
         //Cambiar las variables por los campos modificados por el usuario:
         areaEn = document.getElementById("areaEn").value;
         bajaEn = document.getElementById("bajaEn").value;
@@ -288,6 +365,8 @@ function actualizarEntidad() {
             if (!error) {
                 console.log("Entidad actualizada");
                 //Se informa que la actualización a tenido exito:
+                document.getElementById("infoTabla").value = "Nuevo:"
+                document.getElementById("informaUsuario").value = "Se modifico la siguente información:"
                 document.getElementById("estadoTarea").value = "¡Actualización exitosa!"
             } else {
                 console.log("¡Ocurrio un error en la actualización...!");
@@ -298,6 +377,7 @@ function actualizarEntidad() {
         });
     } else {
         //En caso que no haya un busqueda anteriormente:
+        document.getElementById("informaUsuario").value = "¡No hay información para trabajar!"
         document.getElementById("estadoTarea").value = "Debes realizar una busqueda primero...";
     }
 
