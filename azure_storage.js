@@ -88,8 +88,118 @@ function consultarEntidad() {
     rowKeyBusqueda = document.getElementById("rowKeyBusqueda").value;
     tableSvc.retrieveEntity(`${tablaUsar}`, `${partitionKeyBusqueda}`, `${rowKeyBusqueda}`, function(error, result, response) {
         if (!error) {
-            //Se obtiene la información en un json:
-            task = result;
+            //Se obtiene la información en un json valor por valor en caso de no existir alguno:
+            task['PartitionKey']['_'] = result['PartitionKey']['_'];
+            task['RowKey']['_'] = result['RowKey']['_'];
+            task['Timestamp']['_'] = result['Timestamp']['_'];
+            //-----------
+            if (result['Area'] == undefined) {
+                task['Area']['_'] = "";
+            } else {
+                task['Area']['_'] = result['Area']['_'];
+            }
+            //-----------
+            if (result['Baja'] == undefined) {
+                task['Baja']['_'] = "";
+            } else {
+                task['Baja']['_'] = result['Baja']['_'];
+            }
+            //-----------
+            if (result['Borrado'] == undefined) {
+                task['Borrado']['_'] = "";
+            } else {
+                task['Borrado']['_'] = result['Borrado']['_'];
+            }
+            //-----------
+            if (result['Check'] == undefined) {
+                task['Check']['_'] = "";
+            } else {
+                task['Check']['_'] = result['Check']['_'];
+            }
+            //-----------
+            if (result['Descripcion'] == undefined) {
+                task['Descripcion']['_'] = "";
+            } else {
+                task['Descripcion']['_'] = result['Descripcion']['_'];
+            }
+            //-----------
+            if (result['Fecha_Fin'] == undefined) {
+                task['Fecha_Fin']['_'] = "";
+            } else {
+                task['Fecha_Fin']['_'] = result['Fecha_Fin']['_'];
+            }
+            //-----------
+            if (result['Fecha_ini'] == undefined) {
+                task['Fecha_ini']['_'] = "";
+            } else {
+                task['Fecha_ini']['_'] = result['Fecha_ini']['_'];
+            }
+            //-----------
+            if (result['HojaDeServicio'] == undefined) {
+                task['HojaDeServicio']['_'] = "";
+            } else {
+                task['HojaDeServicio']['_'] = result['HojaDeServicio']['_'];
+            }
+            //-----------
+            if (result['Inmueble'] == undefined) {
+                task['Inmueble']['_'] = "";
+            } else {
+                task['Inmueble']['_'] = result['Inmueble']['_'];
+            }
+            //-----------
+            if (result['Localidad'] == undefined) {
+                task['Localidad']['_'] = "";
+            } else {
+                task['Localidad']['_'] = result['Localidad']['_'];
+            }
+            //-----------
+            if (result['NombreEnlace'] == undefined) {
+                task['NombreEnlace']['_'] = "";
+            } else {
+                task['NombreEnlace']['_'] = result['NombreEnlace']['_'];
+            }
+            //-----------
+            if (result['NombreUsuario'] == undefined) {
+                task['NombreUsuario']['_'] = "";
+            } else {
+                task['NombreUsuario']['_'] = result['NombreUsuario']['_'];
+            }
+            //-----------
+            if (result['Pospuesto'] == undefined) {
+                task['Pospuesto']['_'] = "";
+            } else {
+                task['Pospuesto']['_'] = result['Pospuesto']['_'];
+            }
+            //-----------
+            if (result['Proyecto'] == undefined) {
+                task['Proyecto']['_'] = "";
+            } else {
+                task['Proyecto']['_'] = result['Proyecto']['_'];
+            }
+            //-----------
+            if (result['Resguardo'] == undefined) {
+                task['Resguardo']['_'] = "";
+            } else {
+                task['Resguardo']['_'] = result['Resguardo']['_'];
+            }
+            //-----------
+            if (result['SerieBorrada'] == undefined) {
+                task['SerieBorrada']['_'] = "";
+            } else {
+                task['SerieBorrada']['_'] = result['SerieBorrada']['_'];
+            }
+            //-----------
+            if (result['Servicio'] == undefined) {
+                task['Servicio']['_'] = "";
+            } else {
+                task['Servicio']['_'] = result['Servicio']['_'];
+            }
+            //-----------
+            if (result['Status'] == undefined) {
+                task['Status']['_'] = "";
+            } else {
+                task['Status']['_'] = result['Status']['_'];
+            }
 
             //Se extrae la informacion del json en variables:
             partitionKeyEn = task['PartitionKey']['_'];
@@ -118,7 +228,7 @@ function consultarEntidad() {
             taskDelete['PartitionKey']['_'] = task['PartitionKey']['_'];
             taskDelete['RowKey']['_'] = task['RowKey']['_'];
 
-            //Se manda la información obtenida a la ventana HTML:
+            //Se limpa la información vieja de la ventana HTML:
             document.getElementById("partitionKeyEn").value = partitionKeyEn;
             document.getElementById("rowKeyEn").value = rowKeyEn;
             document.getElementById("timestampEn").value = timestampEn;

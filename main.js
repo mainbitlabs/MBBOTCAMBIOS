@@ -1,5 +1,4 @@
-//Instalación: npm install
-//El package.json contiene todo lo necesario. 
+//Instalación: npm install --save-dev electron
 //Ejecutar: npm start
 const { app, BrowserWindow } = require('electron')
 

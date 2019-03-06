@@ -8,10 +8,11 @@
     <title>Mainbit BOT Cambios</title>
 
     <script src="azure_storage.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
 <body>
-    <div>
+    <div id="logomainbit">
         <img src="./assets/logomainbit.png">
     </div>
     <div>
@@ -21,14 +22,14 @@
     <div>
         <ul>
             <li>
-                <p>Ingresa tu PartitionKey y RowKey para buscar la información con la que se trabajara:</p>
+                <p>Ingresa tu "Nombre de Asociado" y "Numero de Serie" para buscar la información con la que se trabajara:</p>
                 <table>
                     <tr>
-                        <td>PartitionKey:</td>
+                        <td>Nombre de Asociado:</td>
                         <td><input type="text" id="partitionKeyBusqueda"></td>
                     </tr>
                     <tr>
-                        <td>RowKey:</td>
+                        <td>Numero de Serie:</td>
                         <td><input type="text" id="rowKeyBusqueda"></td>
                     </tr>
                     <tr>
@@ -37,8 +38,8 @@
                 </table>
             </li>
             <li>
-                <p>Cambio de PartitionKey:
-                    <br>Coloca el nombre de tu nueva PartitionKey. Te informare del resultado
+                <p>Cambio de "Nombre de Asociado":
+                    <br>Coloca el nuevo "Nombre de Asociado". Te informare del resultado
                     <br>una vez concluida la tarea.</p>
                 <input type="text" id="newPartKey">
                 <input type="button" value="Confirmar" onclick="remplazarPartKey()">
@@ -47,143 +48,145 @@
                 <p>Puedes modificar los campos permitidos escribiendo sobre ellos
                     <br>despues de una busqueda y dando click en el boton "Actualizar".</p>
             </li>
-            <table>
-                <input type="text" id="informaUsuario" readonly="readonly" size="70" value="No hay información:">
-                <tr>
-                    <td><input type="button" value="Actualizar" onclick="actualizarEntidad()"></td>
-                    <td><strong><input type="text" readonly="readonly" id="infoTabla" value="Sin info:"></strong></td>
-                    <td><strong>Permisos:</strong></td>
-                    <td><strong>Viejo:</strong></td>
-                </tr>
-                <tr>
-                    <td>PartitionKey:</td>
-                    <td><input type="text" readonly="readonly" id="partitionKeyEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="partitionKeyCam"></td>
-                </tr>
-                <tr>
-                    <td>RowKey:</td>
-                    <td><input type="text" readonly="readonly" id="rowKeyEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="rowKeyCam"></td>
-                </tr>
-                <tr>
-                    <td>Timestamp:</td>
-                    <td><input type="text" readonly="readonly" id="timestampEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="timestampCam"></td>
-                </tr>
-                <tr>
-                    <td>Area:</td>
-                    <td><input type="text" readonly="readonly" id="areaEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="areaCam"></td>
-                </tr>
-                <tr>
-                    <td>Baja:</td>
-                    <td><input type="text" id="bajaEn"></td>
-                    <td>[Permite modificación]</td>
-                    <td><input type="text" readonly="readonly" id="bajaCam"></td>
-                </tr>
-                <tr>
-                    <td>Borrado:</td>
-                    <td><input type="text" readonly="readonly" id="borradoEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="borradoCam"></td>
-                </tr>
-                <tr>
-                    <td>Check:</td>
-                    <td><input type="text" readonly="readonly" id="checkEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="checkCam"></td>
-                </tr>
-                <tr>
-                    <td>Descripcion:</td>
-                    <td><input type="text" readonly="readonly" id="descripcionEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="descripcionCam"></td>
-                </tr>
-                <tr>
-                    <td>Fecha Fin:</td>
-                    <td><input type="text" readonly="readonly" id="fechafinEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="fechafinCam"></td>
-                </tr>
-                <tr>
-                    <td>Fecha ini:</td>
-                    <td><input type="text" readonly="readonly" id="fechainiEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="fechainiCam"></td>
-                </tr>
-                <tr>
-                    <td>Hoja de servicio:</td>
-                    <td><input type="text" readonly="readonly" id="hojadeservicioEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="hojadeservicioCam"></td>
-                </tr>
-                <tr>
-                    <td>Inmueble:</td>
-                    <td><input type="text" readonly="readonly" id="inmuebleEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="inmuebleCam"></td>
-                </tr>
-                <tr>
-                    <td>Localidad:</td>
-                    <td><input type="text" readonly="readonly" id="localidadEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="localidadCam"></td>
-                </tr>
-                <tr>
-                    <td>Nombre Enlace:</td>
-                    <td><input type="text" id="nombreenlaceEn"></td>
-                    <td>[Permite modificación]</td>
-                    <td><input type="text" readonly="readonly" id="nombreenlaceCam"></td>
-                </tr>
-                <tr>
-                    <td>Nombre Usuario:</td>
-                    <td><input type="text" id="nombreusuarioEn"></td>
-                    <td>[Permite modificación]</td>
-                    <td><input type="text" readonly="readonly" id="nombreusuarioCam"></td>
-                </tr>
-                <tr>
-                    <td>Pospuesto:</td>
-                    <td><input type="text" readonly="readonly" id="pospuestoEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="pospuestoCam"></td>
-                </tr>
-                <tr>
-                    <td>Proyecto:</td>
-                    <td><input type="text" id="proyectoEn"></td>
-                    <td>[Permite modificación]</td>
-                    <td><input type="text" readonly="readonly" id="proyectoCam"></td>
-                </tr>
-                <tr>
-                    <td>Resguardo:</td>
-                    <td><input type="text" readonly="readonly" id="resguardoEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="resguardoCam"></td>
-                </tr>
-                <tr>
-                    <td>Serie Borrada:</td>
-                    <td><input type="text" readonly="readonly" id="serieborradaEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="serieborradaCam"></td>
-                </tr>
-                <tr>
-                    <td>Status:</td>
-                    <td><input type="text" readonly="readonly" id="statusEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="statusCam"></td>
-                </tr>
-                <tr>
-                    <td>Servicio:</td>
-                    <td><input type="text" readonly="readonly" id="servicioEn"></td>
-                    <td></td>
-                    <td><input type="text" readonly="readonly" id="servicioCam"></td>
-                </tr>
-            </table>
+            <input type="text" id="informaUsuario" class="sinBordesInputText" readonly="readonly" size="70" value="No hay información:">
+            <div id="tablaInformacion">
+                <table>
+                    <tr>
+                        <td><input type="button" value="Actualizar" onclick="actualizarEntidad()"></td>
+                        <td><strong><input type="text" class="sinBordesInputText" readonly="readonly" id="infoTabla" value="Sin info:"></strong></td>
+                        <td></td>
+                        <td><strong>Viejo:</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre de Asociado:</td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="partitionKeyEn"></td>
+                        <td></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="partitionKeyCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Numero de Serie:</td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="rowKeyEn"></td>
+                        <td></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="rowKeyCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Modificado en:</td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="timestampEn"></td>
+                        <td></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="timestampCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Area:</td>
+                        <td><input type="text" id="areaEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="areaCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Baja:</td>
+                        <td><input type="text" id="bajaEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="bajaCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Borrado:</td>
+                        <td><input type="text" id="borradoEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="borradoCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Check:</td>
+                        <td><input type="text" id="checkEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="checkCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Descripcion:</td>
+                        <td><input type="text" id="descripcionEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="descripcionCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha Fin:</td>
+                        <td><input type="text" id="fechafinEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="fechafinCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha ini:</td>
+                        <td><input type="text" id="fechainiEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="fechainiCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Hoja de servicio:</td>
+                        <td><input type="text" id="hojadeservicioEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="hojadeservicioCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Inmueble:</td>
+                        <td><input type="text" id="inmuebleEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="inmuebleCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Localidad:</td>
+                        <td><input type="text" id="localidadEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="localidadCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre Enlace:</td>
+                        <td><input type="text" id="nombreenlaceEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="nombreenlaceCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre Usuario:</td>
+                        <td><input type="text" id="nombreusuarioEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="nombreusuarioCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Pospuesto:</td>
+                        <td><input type="text" id="pospuestoEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="pospuestoCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Proyecto:</td>
+                        <td><input type="text" id="proyectoEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="proyectoCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Resguardo:</td>
+                        <td><input type="text" id="resguardoEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="resguardoCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Serie Borrada:</td>
+                        <td><input type="text" id="serieborradaEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="serieborradaCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td><input type="text" id="statusEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="statusCam"></td>
+                    </tr>
+                    <tr>
+                        <td>Servicio:</td>
+                        <td><input type="text" id="servicioEn"></td>
+                        <td><strong>&it;<---></strong></td>
+                        <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="servicioCam"></td>
+                    </tr>
+                </table>
+            </div>
             <li>
-                <p>Estado de la tarea: <input type="text" id="estadoTarea" readonly="readonly" size="70"></p>
+                <p>Estado de la tarea: <input type="text" id="estadoTarea" class="sinBordesInputText" readonly="readonly" size="70"></p>
             </li>
         </ul>
     </div>
