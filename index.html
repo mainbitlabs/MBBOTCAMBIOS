@@ -17,42 +17,52 @@
     </div>
     <div>
         <h1>Bienvenido</h1>
-        <p>Te ayudaré a buscar y modificar información en Azure Storage Table:</p>
+        <p>Te ayudaré a buscar y modificar información en la base del BOT:</p>
     </div>
     <div>
-        <ul>
-            <li>
-                <p>Ingresa tu "Nombre de Asociado" y "Numero de Serie" para buscar la información con la que se trabajara:</p>
+        <div id="areaBusqueda">
+            <ul>
+                <li>
+                    <p>Ingresa tu <strong>"Nombre de Asociado"</strong> y <strong>"Numero de Serie"</strong>:</p>
+                </li>
                 <table>
                     <tr>
                         <td>Nombre de Asociado:</td>
-                        <td><input type="text" id="partitionKeyBusqueda"></td>
+                        <td><input type="text" class="cajaTexto" id="partitionKeyBusqueda"></td>
                     </tr>
                     <tr>
                         <td>Numero de Serie:</td>
-                        <td><input type="text" id="rowKeyBusqueda"></td>
+                        <td><input type="text" class="cajaTexto" id="rowKeyBusqueda"></td>
                     </tr>
                     <tr>
-                        <td><input type="button" value="Buscar" onclick="consultarEntidad()"></td>
+                        <td><input type="button" id="botonBuscar" value="Buscar" onclick="consultarEntidad()"></td>
                     </tr>
                 </table>
-            </li>
-            <li>
-                <p>Cambio de "Nombre de Asociado":
-                    <br>Coloca el nuevo "Nombre de Asociado". Te informare del resultado
-                    <br>una vez concluida la tarea.</p>
-                <input type="text" id="newPartKey">
-                <input type="button" value="Confirmar" onclick="remplazarPartKey()">
-            </li>
-            <li>
-                <p>Puedes modificar los campos permitidos escribiendo sobre ellos
-                    <br>despues de una busqueda y dando click en el boton "Actualizar".</p>
-            </li>
-            <input type="text" id="informaUsuario" class="sinBordesInputText" readonly="readonly" size="70" value="No hay información:">
-            <div id="tablaInformacion">
+                <p>Estado de la tarea: <input type="text" id="estadoTarea" class="sinBordesInputText" readonly="readonly" size="70"></p>
+            </ul>
+        </div>
+        <div id="areaCambioNombre">
+            <ul>
+                <li>
+                    <p>Cambio de "Nombre de Asociado":</p>
+                </li>
+                <input type="text" class="cajaTexto" id="newPartKey">
+                <input type="button" id="botonConfirmar" value="Confirmar" onclick="remplazarPartKey()">
+            </ul>
+        </div>
+        <div id="areaTabla">
+            <div id="areaTablaInformacion">
+                <ul>
+                    <li>
+                        <p>Modificica la información necesaria escribiendo sobre los campos.</p>
+                    </li>
+                    <input type="text" id="informaUsuario" class="sinBordesInputText" readonly="readonly" size="70" value="No hay información:">
+                </ul>
+            </div>
+            <div id="areaTablaDatos">
                 <table>
                     <tr>
-                        <td><input type="button" value="Actualizar" onclick="actualizarEntidad()"></td>
+                        <td><input type="button" id="botonActualizar" value="Actualizar" onclick="actualizarEntidad()"></td>
                         <td><strong><input type="text" class="sinBordesInputText" readonly="readonly" id="infoTabla" value="Sin info:"></strong></td>
                         <td></td>
                         <td><strong>Viejo:</strong></td>
@@ -77,118 +87,115 @@
                     </tr>
                     <tr>
                         <td>Area:</td>
-                        <td><input type="text" id="areaEn"></td>
+                        <td><input type="text" class="cajaTexto" id="areaEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="areaCam"></td>
                     </tr>
                     <tr>
                         <td>Baja:</td>
-                        <td><input type="text" id="bajaEn"></td>
+                        <td><input type="text" class="cajaTexto" id="bajaEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="bajaCam"></td>
                     </tr>
                     <tr>
                         <td>Borrado:</td>
-                        <td><input type="text" id="borradoEn"></td>
+                        <td><input type="text" class="cajaTexto" id="borradoEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="borradoCam"></td>
                     </tr>
                     <tr>
                         <td>Check:</td>
-                        <td><input type="text" id="checkEn"></td>
+                        <td><input type="text" class="cajaTexto" id="checkEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="checkCam"></td>
                     </tr>
                     <tr>
                         <td>Descripcion:</td>
-                        <td><input type="text" id="descripcionEn"></td>
+                        <td><input type="text" class="cajaTexto" id="descripcionEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="descripcionCam"></td>
                     </tr>
                     <tr>
                         <td>Fecha Fin:</td>
-                        <td><input type="text" id="fechafinEn"></td>
+                        <td><input type="text" class="cajaTexto" id="fechafinEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="fechafinCam"></td>
                     </tr>
                     <tr>
                         <td>Fecha ini:</td>
-                        <td><input type="text" id="fechainiEn"></td>
+                        <td><input type="text" class="cajaTexto" id="fechainiEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="fechainiCam"></td>
                     </tr>
                     <tr>
                         <td>Hoja de servicio:</td>
-                        <td><input type="text" id="hojadeservicioEn"></td>
+                        <td><input type="text" class="cajaTexto" id="hojadeservicioEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="hojadeservicioCam"></td>
                     </tr>
                     <tr>
                         <td>Inmueble:</td>
-                        <td><input type="text" id="inmuebleEn"></td>
+                        <td><input type="text" class="cajaTexto" id="inmuebleEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="inmuebleCam"></td>
                     </tr>
                     <tr>
                         <td>Localidad:</td>
-                        <td><input type="text" id="localidadEn"></td>
+                        <td><input type="text" class="cajaTexto" id="localidadEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="localidadCam"></td>
                     </tr>
                     <tr>
                         <td>Nombre Enlace:</td>
-                        <td><input type="text" id="nombreenlaceEn"></td>
+                        <td><input type="text" class="cajaTexto" id="nombreenlaceEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="nombreenlaceCam"></td>
                     </tr>
                     <tr>
                         <td>Nombre Usuario:</td>
-                        <td><input type="text" id="nombreusuarioEn"></td>
+                        <td><input type="text" class="cajaTexto" id="nombreusuarioEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="nombreusuarioCam"></td>
                     </tr>
                     <tr>
                         <td>Pospuesto:</td>
-                        <td><input type="text" id="pospuestoEn"></td>
+                        <td><input type="text" class="cajaTexto" id="pospuestoEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="pospuestoCam"></td>
                     </tr>
                     <tr>
                         <td>Proyecto:</td>
-                        <td><input type="text" id="proyectoEn"></td>
+                        <td><input type="text" class="cajaTexto" id="proyectoEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="proyectoCam"></td>
                     </tr>
                     <tr>
                         <td>Resguardo:</td>
-                        <td><input type="text" id="resguardoEn"></td>
+                        <td><input type="text" class="cajaTexto" id="resguardoEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="resguardoCam"></td>
                     </tr>
                     <tr>
                         <td>Serie Borrada:</td>
-                        <td><input type="text" id="serieborradaEn"></td>
+                        <td><input type="text" class="cajaTexto" id="serieborradaEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="serieborradaCam"></td>
                     </tr>
                     <tr>
                         <td>Status:</td>
-                        <td><input type="text" id="statusEn"></td>
+                        <td><input type="text" class="cajaTexto" id="statusEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="statusCam"></td>
                     </tr>
                     <tr>
                         <td>Servicio:</td>
-                        <td><input type="text" id="servicioEn"></td>
+                        <td><input type="text" class="cajaTexto" id="servicioEn"></td>
                         <td><strong>&it;<---></strong></td>
                         <td><input type="text" class="fondoNoEscribirInputText" readonly="readonly" id="servicioCam"></td>
                     </tr>
                 </table>
             </div>
-            <li>
-                <p>Estado de la tarea: <input type="text" id="estadoTarea" class="sinBordesInputText" readonly="readonly" size="70"></p>
-            </li>
-        </ul>
+        </div>
     </div>
 </body>
 </body>

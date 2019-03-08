@@ -47,7 +47,7 @@ var taskDelete = {
 };
 
 //Variables para realizar una busqueda:
-var tablaUsar = "botdyesatb02"
+var tablaUsar = "botdyesatb01"
 var partitionKeyBusqueda = "";
 var rowKeyBusqueda = "";
 
@@ -277,9 +277,11 @@ function consultarEntidad() {
             //Se informa del estado de la busqueda:
             document.getElementById("infoTabla").value = "Resultado busqueda:"
             document.getElementById("informaUsuario").value = "Se encontro la siguente información:"
+            document.querySelector("#estadoTarea").style.color = "green";
             document.getElementById("estadoTarea").value = "¡Busqueda exitosa!"
             console.log("Busqueda correcta");
         } else {
+            document.querySelector("#estadoTarea").style.color = "red";
             document.getElementById("estadoTarea").value = "Ocurrio en error en la busqueda."
             console.log("Ocurrio en error...");
         }
@@ -294,108 +296,117 @@ function remplazarPartKey() {
     //Verifica en que estado se encuentra la tarea actual y toma una decisión de que hacer:
     if (stringIF == "¡Busqueda exitosa!") {
         newPatitionKey = document.getElementById("newPartKey").value;
+        if (newPatitionKey != "") {
+            task['PartitionKey']['_'] = newPatitionKey.toString();
 
-        task['PartitionKey']['_'] = newPatitionKey.toString();
+            tableSvc.insertEntity(`${tablaUsar}`, task, function(error, result, response) {
+                if (!error) {
 
-        tableSvc.insertEntity(`${tablaUsar}`, task, function(error, result, response) {
-            if (!error) {
-
-                document.getElementById("estadoTarea").value = "Se agrego la entidad correctamente.";
-                //Se elimina la entidad que fue remplazada con la insertada anteriormente:
-                tableSvc.deleteEntity(`${tablaUsar}`, taskDelete, function(error, response) {
-                    if (!error) {
-                        //Se manda la información vieja al HTML:
-                        document.getElementById("partitionKeyCam").value = partitionKeyEn;
-                        document.getElementById("rowKeyCam").value = rowKeyEn;
-                        document.getElementById("timestampCam").value = timestampEn;
-                        document.getElementById("areaCam").value = areaEn;
-                        document.getElementById("bajaCam").value = bajaEn;
-                        document.getElementById("borradoCam").value = borradoEn;
-                        document.getElementById("checkCam").value = checkEn;
-                        document.getElementById("descripcionCam").value = descripcionEn;
-                        document.getElementById("fechafinCam").value = fecha_FinEn;
-                        document.getElementById("fechainiCam").value = fecha_iniEn;
-                        document.getElementById("hojadeservicioCam").value = hojaDeServicioEn;
-                        document.getElementById("inmuebleCam").value = inmuebleEn;
-                        document.getElementById("localidadCam").value = localidadEn;
-                        document.getElementById("nombreenlaceCam").value = nombreEnlaceEn;
-                        document.getElementById("nombreusuarioCam").value = nombreUsuarioEn;
-                        document.getElementById("pospuestoCam").value = pospuestoEn;
-                        document.getElementById("proyectoCam").value = proyectoEn;
-                        document.getElementById("resguardoCam").value = resguardoEn;
-                        document.getElementById("serieborradaCam").value = serieBorradaEn;
-                        document.getElementById("statusCam").value = statusEn;
-                        document.getElementById("servicioCam").value = servicioEn;
-
-
-                        //Se extrae la informacion del json en variables:
-                        partitionKeyEn = task['PartitionKey']['_'];
-                        rowKeyEn = task['RowKey']['_'];
-                        timestampEn = task['Timestamp']['_'];
-                        areaEn = task['Area']['_'];
-                        bajaEn = task['Baja']['_'];
-                        borradoEn = task['Borrado']['_'];
-                        checkEn = task['Check']['_'];
-                        descripcionEn = task['Descripcion']['_'];
-                        fecha_FinEn = task['Fecha_Fin']['_'];
-                        fecha_iniEn = task['Fecha_ini']['_'];
-                        hojaDeServicioEn = task['HojaDeServicio']['_'];
-                        inmuebleEn = task['Inmueble']['_'];
-                        localidadEn = task['Localidad']['_'];
-                        nombreEnlaceEn = task['NombreEnlace']['_'];
-                        nombreUsuarioEn = task['NombreUsuario']['_'];
-                        pospuestoEn = task['Pospuesto']['_'];
-                        proyectoEn = task['Proyecto']['_'];
-                        resguardoEn = task['Resguardo']['_'];
-                        serieBorradaEn = task['SerieBorrada']['_'];
-                        servicioEn = task['Servicio']['_'];
-                        statusEn = task['Status']['_'];
-
-                        //Se manda la información nueva al HTML:
-                        document.getElementById("partitionKeyEn").value = partitionKeyEn;
-                        document.getElementById("rowKeyEn").value = rowKeyEn;
-                        document.getElementById("timestampEn").value = timestampEn;
-                        document.getElementById("areaEn").value = areaEn;
-                        document.getElementById("bajaEn").value = bajaEn;
-                        document.getElementById("borradoEn").value = borradoEn;
-                        document.getElementById("checkEn").value = checkEn;
-                        document.getElementById("descripcionEn").value = descripcionEn;
-                        document.getElementById("fechafinEn").value = fecha_FinEn;
-                        document.getElementById("fechainiEn").value = fecha_iniEn;
-                        document.getElementById("hojadeservicioEn").value = hojaDeServicioEn;
-                        document.getElementById("inmuebleEn").value = inmuebleEn;
-                        document.getElementById("localidadEn").value = localidadEn;
-                        document.getElementById("nombreenlaceEn").value = nombreEnlaceEn;
-                        document.getElementById("nombreusuarioEn").value = nombreUsuarioEn;
-                        document.getElementById("pospuestoEn").value = pospuestoEn;
-                        document.getElementById("proyectoEn").value = proyectoEn;
-                        document.getElementById("resguardoEn").value = resguardoEn;
-                        document.getElementById("serieborradaEn").value = serieBorradaEn;
-                        document.getElementById("statusEn").value = statusEn;
-                        document.getElementById("servicioEn").value = servicioEn;
+                    document.getElementById("estadoTarea").value = "Se agrego la entidad correctamente.";
+                    //Se elimina la entidad que fue remplazada con la insertada anteriormente:
+                    tableSvc.deleteEntity(`${tablaUsar}`, taskDelete, function(error, response) {
+                        if (!error) {
+                            //Se manda la información vieja al HTML:
+                            document.getElementById("partitionKeyCam").value = partitionKeyEn;
+                            document.getElementById("rowKeyCam").value = rowKeyEn;
+                            document.getElementById("timestampCam").value = timestampEn;
+                            document.getElementById("areaCam").value = areaEn;
+                            document.getElementById("bajaCam").value = bajaEn;
+                            document.getElementById("borradoCam").value = borradoEn;
+                            document.getElementById("checkCam").value = checkEn;
+                            document.getElementById("descripcionCam").value = descripcionEn;
+                            document.getElementById("fechafinCam").value = fecha_FinEn;
+                            document.getElementById("fechainiCam").value = fecha_iniEn;
+                            document.getElementById("hojadeservicioCam").value = hojaDeServicioEn;
+                            document.getElementById("inmuebleCam").value = inmuebleEn;
+                            document.getElementById("localidadCam").value = localidadEn;
+                            document.getElementById("nombreenlaceCam").value = nombreEnlaceEn;
+                            document.getElementById("nombreusuarioCam").value = nombreUsuarioEn;
+                            document.getElementById("pospuestoCam").value = pospuestoEn;
+                            document.getElementById("proyectoCam").value = proyectoEn;
+                            document.getElementById("resguardoCam").value = resguardoEn;
+                            document.getElementById("serieborradaCam").value = serieBorradaEn;
+                            document.getElementById("statusCam").value = statusEn;
+                            document.getElementById("servicioCam").value = servicioEn;
 
 
-                        //Se notifica al usuario el estado de la tarea:
-                        document.getElementById("infoTabla").value = "Nuevo:"
-                        document.getElementById("informaUsuario").value = "Se modifico el PartitionKey:"
-                        document.getElementById("estadoTarea").value = "¡Cambio realizado!";
-                        console.log('La entidad se ha eliminado.');
-                    } else {
-                        //Se notifica al usuario si hay un error:
-                        document.getElementById("estadoTarea").value = "Ocurrio un error durante el cambio.";
-                        console.log("Ocurrio un error...");
-                        return;
-                    }
-                });
-            } else {
-                //Se notifica al usuario si hay un error:
-                document.getElementById("estadoTarea").value = "Ocurrio un error durante el cambio.";
-                return;
-            }
-        });
+                            //Se extrae la informacion del json en variables:
+                            partitionKeyEn = task['PartitionKey']['_'];
+                            rowKeyEn = task['RowKey']['_'];
+                            timestampEn = task['Timestamp']['_'];
+                            areaEn = task['Area']['_'];
+                            bajaEn = task['Baja']['_'];
+                            borradoEn = task['Borrado']['_'];
+                            checkEn = task['Check']['_'];
+                            descripcionEn = task['Descripcion']['_'];
+                            fecha_FinEn = task['Fecha_Fin']['_'];
+                            fecha_iniEn = task['Fecha_ini']['_'];
+                            hojaDeServicioEn = task['HojaDeServicio']['_'];
+                            inmuebleEn = task['Inmueble']['_'];
+                            localidadEn = task['Localidad']['_'];
+                            nombreEnlaceEn = task['NombreEnlace']['_'];
+                            nombreUsuarioEn = task['NombreUsuario']['_'];
+                            pospuestoEn = task['Pospuesto']['_'];
+                            proyectoEn = task['Proyecto']['_'];
+                            resguardoEn = task['Resguardo']['_'];
+                            serieBorradaEn = task['SerieBorrada']['_'];
+                            servicioEn = task['Servicio']['_'];
+                            statusEn = task['Status']['_'];
+
+                            //Se manda la información nueva al HTML:
+                            document.getElementById("partitionKeyEn").value = partitionKeyEn;
+                            document.getElementById("rowKeyEn").value = rowKeyEn;
+                            document.getElementById("timestampEn").value = timestampEn;
+                            document.getElementById("areaEn").value = areaEn;
+                            document.getElementById("bajaEn").value = bajaEn;
+                            document.getElementById("borradoEn").value = borradoEn;
+                            document.getElementById("checkEn").value = checkEn;
+                            document.getElementById("descripcionEn").value = descripcionEn;
+                            document.getElementById("fechafinEn").value = fecha_FinEn;
+                            document.getElementById("fechainiEn").value = fecha_iniEn;
+                            document.getElementById("hojadeservicioEn").value = hojaDeServicioEn;
+                            document.getElementById("inmuebleEn").value = inmuebleEn;
+                            document.getElementById("localidadEn").value = localidadEn;
+                            document.getElementById("nombreenlaceEn").value = nombreEnlaceEn;
+                            document.getElementById("nombreusuarioEn").value = nombreUsuarioEn;
+                            document.getElementById("pospuestoEn").value = pospuestoEn;
+                            document.getElementById("proyectoEn").value = proyectoEn;
+                            document.getElementById("resguardoEn").value = resguardoEn;
+                            document.getElementById("serieborradaEn").value = serieBorradaEn;
+                            document.getElementById("statusEn").value = statusEn;
+                            document.getElementById("servicioEn").value = servicioEn;
+
+
+                            //Se notifica al usuario el estado de la tarea:
+                            document.getElementById("infoTabla").value = "Nuevo:"
+                            document.getElementById("informaUsuario").value = "Se modifico el PartitionKey:"
+                            document.querySelector("#estadoTarea").style.color = "green";
+                            document.getElementById("estadoTarea").value = "¡Cambio realizado!";
+                            console.log('La entidad se ha eliminado.');
+                        } else {
+                            //Se notifica al usuario si hay un error:
+                            document.querySelector("#estadoTarea").style.color = "red";
+                            document.getElementById("estadoTarea").value = "Ocurrio un error durante el cambio.";
+                            console.log("Ocurrio un error...");
+                            return;
+                        }
+                    });
+                } else {
+                    //Se notifica al usuario si hay un error:
+                    document.querySelector("#estadoTarea").style.color = "red";
+                    document.getElementById("estadoTarea").value = "Ocurrio un error durante el cambio.";
+                    return;
+                }
+            });
+        } else {
+            //En caso de no tener información en el campo:
+            document.querySelector("#estadoTarea").style.color = "red";
+            document.getElementById("estadoTarea").value = "¡El campo debe tener información!";
+        }
     } else {
         //En caso que no haya un busqueda anteriormente:
         document.getElementById("informaUsuario").value = "¡No hay información para trabajar!"
+        document.querySelector("#estadoTarea").style.color = "red";
         document.getElementById("estadoTarea").value = "Debes realizar una busqueda primero...";
     }
 }
@@ -477,17 +488,20 @@ function actualizarEntidad() {
                 //Se informa que la actualización a tenido exito:
                 document.getElementById("infoTabla").value = "Nuevo:"
                 document.getElementById("informaUsuario").value = "Se modifico la siguente información:"
+                document.querySelector("#estadoTarea").style.color = "green";
                 document.getElementById("estadoTarea").value = "¡Actualización exitosa!"
             } else {
                 console.log("¡Ocurrio un error en la actualización...!");
                 //Se informa que la actualización no a tenido exito:
                 console.log(error);
+                document.querySelector("#estadoTarea").style.color = "red";
                 document.getElementById("estadoTarea").value = "¡Ocurrio un error en la actualización...!"
             }
         });
     } else {
         //En caso que no haya un busqueda anteriormente:
         document.getElementById("informaUsuario").value = "¡No hay información para trabajar!"
+        document.querySelector("#estadoTarea").style.color = "red";
         document.getElementById("estadoTarea").value = "Debes realizar una busqueda primero...";
     }
 
