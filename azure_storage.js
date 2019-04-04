@@ -6,15 +6,6 @@ var azure = require('azure-storage');
 var azure2 = require('./keys_azure'); //Importación de llaves
 var tableSvc = azure.createTableService(azure2.myaccount, azure2.myaccesskey);
 
-//Formato para importar las llaves:
-//(Debe crearse en otro script y ser llamado con: "var NOMBREVARIABLE = require('RUTADESCRIPT');")
-/*
-var exports = module.exports = {
-    myaccount: 'TUCUENTA',
-    myaccesskey: 'TULLAVE'
-}
-*/
-
 //JSON base para manipular la información:
 var task = {
     PartitionKey: { '_': '' },
@@ -38,6 +29,8 @@ var task = {
     SerieBorrada: { '_': '' },
     Servicio: { '_': '' },
     Status: { '_': '' },
+    No_Fact: { '_': '' },
+    Fecha_Fact: { '_': '' },
 };
 
 //JSON base para eliminar un row:
@@ -76,6 +69,8 @@ var resguardoEn = "";
 var serieBorradaEn = "";
 var servicioEn = "";
 var statusEn = "";
+var no_FactEn = "";
+var fecha_FactEn = "";
 
 //Variable para amacenar el nombre del nuevo PartitionKey que el usuario colóque:
 var newPatitionKey = "";
@@ -89,116 +84,128 @@ function consultarEntidad() {
     tableSvc.retrieveEntity(`${tablaUsar}`, `${partitionKeyBusqueda}`, `${rowKeyBusqueda}`, function(error, result, response) {
         if (!error) {
             //Se obtiene la información en un json valor por valor en caso de no existir alguno:
-            task['PartitionKey']['_'] = result['PartitionKey']['_'];
-            task['RowKey']['_'] = result['RowKey']['_'];
-            task['Timestamp']['_'] = result['Timestamp']['_'];
-            //-----------
+            task['PartitionKey']['_'] = result['PartitionKey']['_']; // 1
+            task['RowKey']['_'] = result['RowKey']['_']; //2
+            task['Timestamp']['_'] = result['Timestamp']['_']; //3
+            //-----------4
             if (result['Area'] == undefined) {
                 task['Area']['_'] = "";
             } else {
                 task['Area']['_'] = result['Area']['_'];
             }
-            //-----------
+            //-----------5
             if (result['Baja'] == undefined) {
                 task['Baja']['_'] = "";
             } else {
                 task['Baja']['_'] = result['Baja']['_'];
             }
-            //-----------
+            //-----------6
             if (result['Borrado'] == undefined) {
                 task['Borrado']['_'] = "";
             } else {
                 task['Borrado']['_'] = result['Borrado']['_'];
             }
-            //-----------
+            //-----------7
             if (result['Check'] == undefined) {
                 task['Check']['_'] = "";
             } else {
                 task['Check']['_'] = result['Check']['_'];
             }
-            //-----------
+            //-----------8
             if (result['Descripcion'] == undefined) {
                 task['Descripcion']['_'] = "";
             } else {
                 task['Descripcion']['_'] = result['Descripcion']['_'];
             }
-            //-----------
+            //-----------9
             if (result['Fecha_Fin'] == undefined) {
                 task['Fecha_Fin']['_'] = "";
             } else {
                 task['Fecha_Fin']['_'] = result['Fecha_Fin']['_'];
             }
-            //-----------
+            //-----------10
             if (result['Fecha_ini'] == undefined) {
                 task['Fecha_ini']['_'] = "";
             } else {
                 task['Fecha_ini']['_'] = result['Fecha_ini']['_'];
             }
-            //-----------
+            //-----------11
             if (result['HojaDeServicio'] == undefined) {
                 task['HojaDeServicio']['_'] = "";
             } else {
                 task['HojaDeServicio']['_'] = result['HojaDeServicio']['_'];
             }
-            //-----------
+            //-----------12
             if (result['Inmueble'] == undefined) {
                 task['Inmueble']['_'] = "";
             } else {
                 task['Inmueble']['_'] = result['Inmueble']['_'];
             }
-            //-----------
+            //-----------13
             if (result['Localidad'] == undefined) {
                 task['Localidad']['_'] = "";
             } else {
                 task['Localidad']['_'] = result['Localidad']['_'];
             }
-            //-----------
+            //-----------14
             if (result['NombreEnlace'] == undefined) {
                 task['NombreEnlace']['_'] = "";
             } else {
                 task['NombreEnlace']['_'] = result['NombreEnlace']['_'];
             }
-            //-----------
+            //-----------15
             if (result['NombreUsuario'] == undefined) {
                 task['NombreUsuario']['_'] = "";
             } else {
                 task['NombreUsuario']['_'] = result['NombreUsuario']['_'];
             }
-            //-----------
+            //-----------16
             if (result['Pospuesto'] == undefined) {
                 task['Pospuesto']['_'] = "";
             } else {
                 task['Pospuesto']['_'] = result['Pospuesto']['_'];
             }
-            //-----------
+            //-----------17
             if (result['Proyecto'] == undefined) {
                 task['Proyecto']['_'] = "";
             } else {
                 task['Proyecto']['_'] = result['Proyecto']['_'];
             }
-            //-----------
+            //-----------18
             if (result['Resguardo'] == undefined) {
                 task['Resguardo']['_'] = "";
             } else {
                 task['Resguardo']['_'] = result['Resguardo']['_'];
             }
-            //-----------
+            //-----------19
             if (result['SerieBorrada'] == undefined) {
                 task['SerieBorrada']['_'] = "";
             } else {
                 task['SerieBorrada']['_'] = result['SerieBorrada']['_'];
             }
-            //-----------
+            //-----------20
             if (result['Servicio'] == undefined) {
                 task['Servicio']['_'] = "";
             } else {
                 task['Servicio']['_'] = result['Servicio']['_'];
             }
-            //-----------
+            //-----------21
             if (result['Status'] == undefined) {
                 task['Status']['_'] = "";
             } else {
                 task['Status']['_'] = result['Status']['_'];
+            }
+            //-----------22
+            if (result['No_Fact'] == undefined) {
+                task['No_Fact']['_'] = "";
+            } else {
+                task['No_Fact']['_'] = result['No_Fact']['_'];
+            }
+            //-----------23
+            if (result['Fecha_Fact'] == undefined) {
+                task['Fecha_Fact']['_'] = "";
+            } else {
+                task['Fecha_Fact']['_'] = result['Fecha_Fact']['_'];
             }
 
             //Se extrae la informacion del json en variables:
@@ -223,6 +230,8 @@ function consultarEntidad() {
             serieBorradaEn = task['SerieBorrada']['_'];
             servicioEn = task['Servicio']['_'];
             statusEn = task['Status']['_'];
+            no_FactEn = task['No_Fact']['_'];
+            fecha_FactEn = task['Fecha_Fact']['_'];
 
             //Se le da información al JSON que eliminara el row en caso de necesitar un cambio de PartitionKey:
             taskDelete['PartitionKey']['_'] = task['PartitionKey']['_'];
@@ -250,6 +259,8 @@ function consultarEntidad() {
             document.getElementById("serieborradaEn").value = serieBorradaEn;
             document.getElementById("statusEn").value = statusEn;
             document.getElementById("servicioEn").value = servicioEn;
+            document.getElementById("no_FactEn").value = no_FactEn;
+            document.getElementById("fecha_FactEn").value = fecha_FactEn;
 
             //Se manda la información vieja al HTML:
             document.getElementById("partitionKeyCam").value = "";
@@ -273,6 +284,8 @@ function consultarEntidad() {
             document.getElementById("serieborradaCam").value = "";
             document.getElementById("statusCam").value = "";
             document.getElementById("servicioCam").value = "";
+            document.getElementById("no_FactCam").value = "";
+            document.getElementById("fecha_FactCam").value = "";
 
             //Se informa del estado de la busqueda:
             document.getElementById("infoTabla").value = "Resultado busqueda:"
@@ -328,6 +341,8 @@ function remplazarPartKey() {
                             document.getElementById("serieborradaCam").value = serieBorradaEn;
                             document.getElementById("statusCam").value = statusEn;
                             document.getElementById("servicioCam").value = servicioEn;
+                            document.getElementById("no_FactCam").value = no_FactEn;
+                            document.getElementById("fecha_FactCam").value = fecha_FactEn;
 
 
                             //Se extrae la informacion del json en variables:
@@ -352,6 +367,8 @@ function remplazarPartKey() {
                             serieBorradaEn = task['SerieBorrada']['_'];
                             servicioEn = task['Servicio']['_'];
                             statusEn = task['Status']['_'];
+                            no_FactEn = task['No_Fact']['_'];
+                            fecha_FactEn = task['Fecha_Fact']['_'];
 
                             //Se manda la información nueva al HTML:
                             document.getElementById("partitionKeyEn").value = partitionKeyEn;
@@ -375,6 +392,8 @@ function remplazarPartKey() {
                             document.getElementById("serieborradaEn").value = serieBorradaEn;
                             document.getElementById("statusEn").value = statusEn;
                             document.getElementById("servicioEn").value = servicioEn;
+                            document.getElementById("no_FactEn").value = no_FactEn;
+                            document.getElementById("fecha_FactEn").value = fecha_FactEn;
 
 
                             //Se notifica al usuario el estado de la tarea:
@@ -440,6 +459,8 @@ function actualizarEntidad() {
         document.getElementById("serieborradaCam").value = serieBorradaEn;
         document.getElementById("statusCam").value = statusEn;
         document.getElementById("servicioCam").value = servicioEn;
+        document.getElementById("no_FactCam").value = no_FactEn;
+        document.getElementById("fecha_FactCam").value = fecha_FactEn;
 
         //Cambiar las variables por los campos modificados por el usuario:
         areaEn = document.getElementById("areaEn").value;
@@ -460,6 +481,8 @@ function actualizarEntidad() {
         serieBorradaEn = document.getElementById("serieborradaEn").value;
         statusEn = document.getElementById("statusEn").value;
         servicioEn = document.getElementById("servicioEn").value;
+        servicioEn = document.getElementById("no_FactEn").value;
+        servicioEn = document.getElementById("fecha_FactEn").value;
 
         //Se le da la información de las variables anteriores al JSON base:
         task['Area']['_'] = areaEn.toString();
@@ -480,6 +503,8 @@ function actualizarEntidad() {
         task['SerieBorrada']['_'] = serieBorradaEn.toString();
         task['Servicio']['_'] = servicioEn.toString();
         task['Status']['_'] = statusEn.toString();
+        task['No_Fact']['_'] = statusEn.toString();
+        task['Fecha_Fact']['_'] = statusEn.toString();
 
         //Realiza la actualización del row:
         tableSvc.replaceEntity(`${tablaUsar}`, task, function(error, result, response) {
